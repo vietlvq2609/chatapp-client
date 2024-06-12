@@ -8,7 +8,7 @@ interface SocketState {
 }
 
 const HOST_SERVER = process.env.REACT_APP_HOST_SERVER || "localhost";
-const SOCKET_URL = `http://${HOST_SERVER}:8080/ws`;
+const SOCKET_URL = `https://${HOST_SERVER}:8080/ws`;
 
 const initialState: SocketState = {
   isConnected: false,

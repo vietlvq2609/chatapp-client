@@ -5,7 +5,7 @@ import { formatUrlPath } from "./StringHandler";
 import { TAxiosError } from "../types/responseTypes";
 
 const HOST_SERVER = process.env.REACT_APP_HOST_SERVER || "localhost";
-const SERVER_URL = `http://${HOST_SERVER}:8080/api/v1`;
+const SERVER_URL = `https://${HOST_SERVER}:8080/api/v1`;
 
 export const makePostRequest = async (path: string, body: Object) => {
   try {
