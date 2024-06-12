@@ -1,16 +1,16 @@
-import React, { ReactNode } from 'react';
-import { useAppDispatch } from './redux/store';
-import { initiateAuth } from './redux/authSlice';
+import React, { ReactNode } from "react";
+import { useAppDispatch } from "./redux/store";
+import { initiateAuth } from "./redux/authSlice";
 
 interface AppProps {
-   children: ReactNode;
+  children: ReactNode;
 }
 
 const App = ({ children }: AppProps) => {
-   const dispatch = useAppDispatch();
-   dispatch(initiateAuth());
+  const dispatch = useAppDispatch();
+  dispatch(initiateAuth());
 
-   return <>{children}</>;
+  return <>{children}</>;
 };
 
 export default App;

@@ -1,22 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { TConversation } from '../types/responseTypes';
+import { createSlice } from "@reduxjs/toolkit";
+import { TConversation } from "../types/responseTypes";
 
 interface Conversation {
-   recentConversations: TConversation[];
+  recentConversations: TConversation[];
 }
 
 const initialState: Conversation = {
-   recentConversations: []
+  recentConversations: [],
 };
 
 const conversationSlice = createSlice({
-   name: 'conversation',
-   initialState,
-   reducers: {
-      setRecentConversations: (state, action) => {
-         state.recentConversations = action.payload;
-      }
-   }
+  name: "conversation",
+  initialState,
+  reducers: {
+    setRecentConversations: (state, action) => {
+      state.recentConversations = action.payload;
+    },
+  },
 });
 
 export const { setRecentConversations } = conversationSlice.actions;
