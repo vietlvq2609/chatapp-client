@@ -12,7 +12,7 @@ const formatUrlPath = (url: string): string => {
 const getReceiverNameFromConversation = (
   conversation: TConversation,
 ): string => {
-  if (user == "null") {
+  if (user === "null") {
     return "null";
   }
   return (
@@ -27,7 +27,7 @@ const getReceiverNameFromConversation = (
 const getReceiverFromConversation = (
   conversation: TConversation,
 ): TUser | null => {
-  if (user == "null") {
+  if (user === "null") {
     return null;
   }
 

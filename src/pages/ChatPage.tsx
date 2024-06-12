@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, FormEvent } from "react";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -78,7 +77,7 @@ function ChatPage() {
 
     if (chatId)
       fetchMessageData().then(() => setTimeout(() => scrollToBottom(), 500));
-  }, [chatId]);
+  }, [chatId, dispatch, user_email]);
 
   useEffect(() => {
     const handleReceiveMessageEvent = (message: any) => {
@@ -257,7 +256,7 @@ function ChatPage() {
               key={conversation.conversation_id}
               sx={[
                 { ...fadeHoverEffect },
-                chatId == conversation.conversation_id.toString() && {
+                chatId === conversation.conversation_id.toString() && {
                   ...activeBackground,
                 },
               ]}

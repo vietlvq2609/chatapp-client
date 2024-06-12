@@ -5,7 +5,6 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Autocomplete from "@mui/material/Autocomplete";
-import CircularProgress from "@mui/material/CircularProgress";
 import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router-dom";
 
@@ -26,7 +25,6 @@ const NewChatForm = ({ setOpen }: newChatFormProps) => {
   const [sentTo, setSentTo] = useState("");
   const [message, setMessage] = useState("");
   const [options, setOptions] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -36,7 +34,6 @@ const NewChatForm = ({ setOpen }: newChatFormProps) => {
     let active = true;
     const fetchUsers = async () => {
       try {
-        setLoading(true);
         const data = await makeGetRequestWithAuth("/users");
         if (active) {
           setOptions(
@@ -51,14 +48,13 @@ const NewChatForm = ({ setOpen }: newChatFormProps) => {
       } catch (error) {
         console.error(error);
       } finally {
-        setLoading(false);
       }
     };
     fetchUsers();
     return () => {
       active = false;
     };
-  }, []);
+  }, [currentUser?.email]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

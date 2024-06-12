@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  Avatar,
   Box,
   Container,
   Grid,
@@ -39,7 +38,7 @@ function SettingPage() {
 
   useEffect(() => {
     fetchUserData();
-  }, []);
+  }, [fetchUserData]);
 
   const onLogout = () => {
     dispatch(logout());

@@ -1,10 +1,7 @@
 import axios, {
-  AxiosHeaders,
   AxiosRequestConfig,
-  RawAxiosRequestHeaders,
 } from "axios";
 import { formatUrlPath } from "./StringHandler";
-import { throws } from "assert";
 import { TAxiosError } from "../types/responseTypes";
 
 const HOST_SERVER = process.env.REACT_APP_HOST_SERVER || "localhost";

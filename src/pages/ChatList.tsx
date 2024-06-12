@@ -30,7 +30,8 @@ const ChatList = () => {
     };
 
     fetchConversations();
-  }, []);
+  }, [dispatch]);
+
   return (
     <Container sx={{ color: "common.white" }}>
       <Grid container spacing={4} padding={4}>

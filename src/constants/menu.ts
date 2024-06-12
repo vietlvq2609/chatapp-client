@@ -3,8 +3,6 @@ import { SvgIconProps } from "@mui/material/SvgIcon";
 import ChatIcon from "@mui/icons-material/Chat";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import LockIcon from "@mui/icons-material/Lock";
-import TranslateIcon from "@mui/icons-material/Translate";
 
 interface MenuItem {
   icon: React.ComponentType<SvgIconProps>;

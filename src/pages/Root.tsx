@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
-import { Outlet, Navigate, useNavigate, Link } from "react-router-dom";
+import { Outlet, Navigate, useNavigate } from "react-router-dom";
 
 import { NavigationBar, Header } from "../components";
 import { useAppSelector, useAppDispatch } from "../redux/store";
@@ -26,7 +26,7 @@ function Root() {
       } catch (error) {
         if (
           isAxiosError(error) &&
-          error?.response?.data?.error_type == "JWT_EXPIRED"
+          error?.response?.data?.error_type === "JWT_EXPIRED"
         ) {
           alert("Session ends! Please login to new session!");
           dispatch(logout());
@@ -60,7 +60,7 @@ function Root() {
     return () => {
       dispatch(disconnectWss());
     };
-  }, [isAuthenticated]);
+  }, [isAuthenticated, dispatch, requestNewToken]);
 
   if (loading) return <div>Loading</div>;
 

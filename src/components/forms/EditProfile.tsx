@@ -2,7 +2,6 @@ import { FormEvent, useEffect, useState } from "react";
 import {
   Box,
   Button,
-  Container,
   Divider,
   Stack,
   TextField,
@@ -15,7 +14,6 @@ import AvatarUpload from "../AvatarUpload";
 import { makePatchRequestWithAuth } from "../../utils/ApiHandler";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { setAppUser } from "../../redux/authSlice";
-import CtAvatar from "../CtAvatar";
 
 interface EditProfileProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,7 +30,6 @@ function EditProfile({ setOpen, user }: EditProfileProps) {
   const usetId = useAppSelector((state) => state.auth.user?.user_id) ?? "";
   const dispatch = useAppDispatch();
 
-  console.log(birth);
   useEffect(() => {
     if (user) {
       setDisplayName(user?.username);
@@ -40,7 +37,7 @@ function EditProfile({ setOpen, user }: EditProfileProps) {
       setPhone(user.phone_number);
       setBirth(dayjs(user.date_of_birth));
     }
-  }, []);
+  }, [user]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

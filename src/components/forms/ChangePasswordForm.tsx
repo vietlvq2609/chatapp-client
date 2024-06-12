@@ -8,8 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import { isAxiosError, makePatchRequestWithAuth } from "../../utils/ApiHandler";
-import { error } from "console";
-import { AxiosError } from "axios";
 
 interface ChangePasswordFormProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
