@@ -17,31 +17,6 @@ function Root() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const requestNewToken = async () => {
-    if (token) {
-      try {
-        const data = await makePostRequest("/auth/refresh-token", token);
-        localStorage.setItem("token", data?.payload?.refreshToken);
-        dispatch(connectToWsThunk());
-      } catch (error) {
-        if (
-          isAxiosError(error) &&
-          error?.response?.data?.error_type === "JWT_EXPIRED"
-        ) {
-          alert("Session ends! Please login to new session!");
-          dispatch(logout());
-          navigate("/login");
-        } else {
-          throw error;
-        }
-      }
-
-      dispatch(refreshToken());
-    } else {
-      localStorage.clear();
-      navigate("/login");
-    }
-  };
 
   const isFirstRender = useRef(true);
 
@@ -50,6 +25,32 @@ function Root() {
       isFirstRender.current = false;
       return;
     }
+
+    const requestNewToken = async () => {
+      if (token) {
+        try {
+          const data = await makePostRequest("/auth/refresh-token", token);
+          localStorage.setItem("token", data?.payload?.refreshToken);
+          dispatch(connectToWsThunk());
+        } catch (error) {
+          if (
+            isAxiosError(error) &&
+            error?.response?.data?.error_type === "JWT_EXPIRED"
+          ) {
+            alert("Session ends! Please login to new session!");
+            dispatch(logout());
+            navigate("/login");
+          } else {
+            throw error;
+          }
+        }
+
+        dispatch(refreshToken());
+      } else {
+        localStorage.clear();
+        navigate("/login");
+      }
+    };
 
     dispatch(showSpinner());
     requestNewToken().finally(() => {
@@ -60,7 +61,7 @@ function Root() {
     return () => {
       dispatch(disconnectWss());
     };
-  }, [isAuthenticated, dispatch, requestNewToken]);
+  }, [isAuthenticated, dispatch]);
 
   if (loading) return <div>Loading</div>;
 

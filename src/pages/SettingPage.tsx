@@ -25,20 +25,20 @@ function SettingPage() {
 
   const dispatch = useAppDispatch();
 
-  const fetchUserData = async () => {
-    try {
-      const res = await makeGetRequestWithAuth(
-        `/users/${currentUser?.user_id}`,
-      );
-      dispatch(setAppUser(res.payload));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const res = await makeGetRequestWithAuth(
+          `/users/${currentUser?.user_id}`,
+        );
+        dispatch(setAppUser(res.payload));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchUserData();
-  }, [fetchUserData]);
+  }, []);
 
   const onLogout = () => {
     dispatch(logout());
