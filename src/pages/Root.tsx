@@ -16,17 +16,19 @@ function Root() {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
 
   const isFirstRender = useRef(true);
 
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
+      setLoading(false);
       return;
     }
 
     const requestNewToken = async () => {
+      const token = localStorage.getItem("token");
+
       if (token) {
         try {
           const data = await makePostRequest("/auth/refresh-token", token);
@@ -61,7 +63,7 @@ function Root() {
     return () => {
       dispatch(disconnectWss());
     };
-  }, [isAuthenticated, dispatch, navigate, token]);
+  }, [isAuthenticated, dispatch, navigate]);
 
   if (loading) return <div>Loading</div>;
 

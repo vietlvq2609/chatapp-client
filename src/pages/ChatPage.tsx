@@ -128,7 +128,7 @@ function ChatPage() {
     return (
       <Stack height="100%" alignItems="center" justifyContent="center">
         <Typography p={4} color="common.white" variant="h5">
-          Connecting to Server......
+          Connecting to server... Refresh the page if you have waited too long!
         </Typography>
       </Stack>
     );
