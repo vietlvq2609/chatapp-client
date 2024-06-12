@@ -38,7 +38,7 @@ function SettingPage() {
     };
 
     fetchUserData();
-  }, []);
+  }, [currentUser?.user_id, dispatch]);
 
   const onLogout = () => {
     dispatch(logout());

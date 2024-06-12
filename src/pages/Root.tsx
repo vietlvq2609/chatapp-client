@@ -61,7 +61,7 @@ function Root() {
     return () => {
       dispatch(disconnectWss());
     };
-  }, [isAuthenticated, dispatch]);
+  }, [isAuthenticated, dispatch, navigate, token]);
 
   if (loading) return <div>Loading</div>;
 
