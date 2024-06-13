@@ -47,11 +47,10 @@ const registerThunk = createAsyncThunk(
 
 const connectToWsThunk = createAsyncThunk("ws/connect", async () => {
   try {
-    wsClient.activate();
     const isConnected = await awaitConnect({
       retries: 5,
       curr: 0,
-      timeinterval: 100,
+      timeinterval: 1000,
     });
 
     return isConnected;
@@ -68,21 +67,24 @@ const awaitConnect = async (awaitConnectConfig: {
   const {
     retries = 3,
     curr = 0,
-    timeinterval = 100,
+    timeinterval = 1000,
   } = awaitConnectConfig || {};
+
+  wsClient.activate();
 
   return new Promise<boolean>((resolve) => {
     setTimeout(async () => {
       if (wsClient && wsClient.connected) {
         resolve(true);
       } else {
-        console.log("Failed to connect! Retrying...");
+        wsClient.deactivate();
         if (curr >= retries) {
           console.log(
             "Failed to connect server, please retry by refreshing the current page!",
           );
           resolve(false);
         } else {
+          console.log("Failed to connect! Retrying...");
           resolve(
             await awaitConnect({ ...awaitConnectConfig, curr: curr + 1 }),
           );
