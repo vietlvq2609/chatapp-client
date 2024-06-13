@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import {
   RouterProvider,
-  createBrowserRouter,
+  createHashRouter,
 } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
@@ -16,7 +16,7 @@ import "./global.css";
 import "dayjs/locale/en-gb";
 import RootRoute from "./RootRoute";
 
-const router = createBrowserRouter([{ path: "*", element: <RootRoute /> }]);
+const router = createHashRouter([{ path: "*", element: <RootRoute /> }]);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
