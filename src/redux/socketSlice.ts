@@ -8,7 +8,7 @@ interface SocketState {
 }
 
 const HOST_SERVER = process.env.REACT_APP_HOST_SERVER || "localhost";
-const SOCKET_URL = `http${HOST_SERVER === "localhost"? "":'s'}://${HOST_SERVER}:${HOST_SERVER === "localhost"? "8080":''}/ws`;
+const SOCKET_URL = `http${HOST_SERVER === "localhost"? "":'s'}://${HOST_SERVER}${HOST_SERVER === "localhost"? ":8080":''}/ws`;
 
 const initialState: SocketState = {
   isConnected: false,
@@ -19,7 +19,8 @@ const token = localStorage.getItem("token");
 const socket = new SockJS(SOCKET_URL);
 export const wsClient = new Client({
   connectHeaders: {
-    Authorization: `Bearer ${token}`,
+    'Authorization': `Bearer ${token}`,
+    'Access-Control-Allow-Credentials': 'false'
   },
   webSocketFactory: () => socket,
   debug: (str) => {
